@@ -20,6 +20,7 @@ public class DialogCliente extends IDialogT<Cliente> {
 	public DialogCliente(Cliente _item, JDialog parentFrame, String title, int width, int height) {
 		super(_item, parentFrame, title, width, height);
 	}
+
 	protected void events() {
 		super.events();
 		tabela.addMouseListener(new MouseAdapter() {
@@ -35,6 +36,7 @@ public class DialogCliente extends IDialogT<Cliente> {
 		    }
 		});
 	}
+	
 	@Override
 	public void newItem() {
 		try {

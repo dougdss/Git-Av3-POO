@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 
 import br.unifor.poo.modelo.Cardapio;
 import br.unifor.poo.modelo.Cliente;
+import br.unifor.poo.modelo.Entregador;
 import br.unifor.poo.modelo.Bar;
 import br.unifor.poo.view.util.Misc;
 
@@ -25,6 +26,7 @@ public class MenuBar extends JMenuBar {
 	private JMenuItem cardapio = new JMenuItem("1.1.1 Cardapios");
 	private JMenuItem cliente = new JMenuItem("1.1.2 Clientes");
 	private JMenuItem bar = new JMenuItem("1.1.3 Bares");
+	private JMenuItem entregadores = new JMenuItem("1.1.4 Entregadores");
 	private JMenuItem fechar = new JMenuItem("1.2 Fechar");
 	
 	private JMenuItem creditos = new JMenu("2 Créditos");
@@ -42,6 +44,7 @@ public class MenuBar extends JMenuBar {
 		cadastro.add(cardapio);
 		cadastro.add(cliente);
 		cadastro.add(bar);
+		cadastro.add(entregadores);
 		sistema.add(fechar);
 		creditos.add(exibir);
 		this.eventsConfig();
@@ -52,6 +55,7 @@ public class MenuBar extends JMenuBar {
 		cadastro.setFont(Misc.FONT);
 		cardapio.setFont(Misc.FONT);
 		cliente.setFont(Misc.FONT);
+		entregadores.setFont(Misc.FONT);
 		fechar.setFont(Misc.FONT);
 		bar.setFont(Misc.FONT);
 		
@@ -62,6 +66,7 @@ public class MenuBar extends JMenuBar {
 	private void eventsConfig() {
 		this.fecharClick();
 		this.cardapioClick();
+		this.entregadoresClick();
 		this.clienteClick();
 		this.uniforClick();
 		this.exibirClick();
@@ -113,6 +118,18 @@ public class MenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(parent, "™ Faminto, Todos os direitos reservados.");
+			}
+		});
+	}
+	
+	private void entregadoresClick() {
+		parent = (JFrame) this.getParent();
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		entregadores.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new DialogEntregador(new Entregador(), parent, "Entregador Teste", screenSize.width - 100, screenSize.height - 100);
 			}
 		});
 	}
