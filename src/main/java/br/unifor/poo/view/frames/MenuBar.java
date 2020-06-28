@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import br.unifor.poo.modelo.Cardapio;
 import br.unifor.poo.modelo.Cliente;
 import br.unifor.poo.modelo.Entregador;
+import br.unifor.poo.modelo.Pedido;
 import br.unifor.poo.modelo.Bar;
 import br.unifor.poo.view.util.Misc;
 
@@ -29,8 +30,12 @@ public class MenuBar extends JMenuBar {
 	private JMenuItem entregadores = new JMenuItem("1.1.4 Entregadores");
 	private JMenuItem fechar = new JMenuItem("1.2 Fechar");
 	
-	private JMenuItem creditos = new JMenu("2 Créditos");
-	private JMenuItem exibir = new JMenuItem("2.1 Exibir");
+	private JMenu pedidos = new JMenu("2 Pedidos");
+	private JMenuItem novoPedido = new JMenuItem("2.1 Novo");
+	private JMenuItem acompanharPedido = new JMenuItem("2.2 Acompanhar");
+	
+	private JMenuItem creditos = new JMenu("3 Créditos");
+	private JMenuItem exibir = new JMenuItem("3.1 Exibir");
 	
 	private JFrame parent = null;
 	private ICloseble closeble = null;
@@ -38,6 +43,7 @@ public class MenuBar extends JMenuBar {
 	public MenuBar(ICloseble _closeble) {
 		this.closeble = _closeble;
 		this.add(sistema);
+		this.add(pedidos);
 		this.add(creditos);
 		this.fonts();
 		sistema.add(cadastro);
@@ -47,11 +53,14 @@ public class MenuBar extends JMenuBar {
 		cadastro.add(entregadores);
 		sistema.add(fechar);
 		creditos.add(exibir);
+		pedidos.add(novoPedido);
+		pedidos.add(acompanharPedido);
 		this.eventsConfig();
 	}
 	private void fonts() {
 		this.setFont(Misc.FONT);
 		sistema.setFont(Misc.FONT);
+		pedidos.setFont(Misc.FONT);
 		cadastro.setFont(Misc.FONT);
 		cardapio.setFont(Misc.FONT);
 		cliente.setFont(Misc.FONT);
@@ -62,6 +71,8 @@ public class MenuBar extends JMenuBar {
 		creditos.setFont(Misc.FONT);
 		creditos.setFont(Misc.FONT);
 		exibir.setFont(Misc.FONT);
+		novoPedido.setFont(Misc.FONT);
+		acompanharPedido.setFont(Misc.FONT);
 	}
 	private void eventsConfig() {
 		this.fecharClick();
@@ -70,6 +81,8 @@ public class MenuBar extends JMenuBar {
 		this.clienteClick();
 		this.uniforClick();
 		this.exibirClick();
+		this.novoPedidoClick();
+		this.acompanharPedidoClick();
 	}
 	private void uniforClick() {
 		parent = (JFrame) this.getParent();
@@ -130,6 +143,30 @@ public class MenuBar extends JMenuBar {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				new DialogEntregador(new Entregador(), parent, "Entregador Teste", screenSize.width - 100, screenSize.height - 100);
+			}
+		});
+	}
+	
+	private void novoPedidoClick() {
+		parent = (JFrame) this.getParent();
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		novoPedido.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new DialogPedido(new Pedido(), parent, "Novo pedido", screenSize.width - 100, screenSize.height - 100);
+			}
+		});
+	}
+	
+	private void acompanharPedidoClick() {
+		parent = (JFrame) this.getParent();
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		acompanharPedido.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 	}

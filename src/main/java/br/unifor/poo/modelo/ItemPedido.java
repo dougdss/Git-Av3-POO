@@ -13,6 +13,15 @@ public class ItemPedido {
 		this.cardapio = cardapio;
 		this.qtd = quantidade;
 	}
+	
+	public ItemPedido(Long id, Pedido pedido, Cardapio cardapio, int quantidade) {
+		this();
+		this.id = id;
+		this.pedido = pedido;
+		this.cardapio = cardapio;
+		this.qtd = quantidade;
+	}
+	
 	public Pedido getPedido() { return pedido; }
 	public void setPedido(Pedido pedido) { this.pedido = pedido; }
 	public Cardapio getCardapio() { return cardapio; }

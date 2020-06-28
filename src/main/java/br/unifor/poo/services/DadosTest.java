@@ -17,4 +17,10 @@ public class DadosTest {
 		cardapios.add(new Cardapio("Cerveja Skoll", 7, 2800));
 		cardapios.add(new Cardapio("Cerveja Skin", 5, 3800));
 	}
+	
+	static {
+		clientes.add(new Cliente("José", "Rua 1"));
+		clientes.add(new Cliente("Maria", "Rua 2"));
+		clientes.add(new Cliente("João", "Rua 3"));
+	}
 }

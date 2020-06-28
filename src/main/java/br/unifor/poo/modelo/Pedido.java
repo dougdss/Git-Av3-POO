@@ -13,7 +13,7 @@ public class Pedido {
 	protected List<ItemPedido> itens = new ArrayList<ItemPedido>();
 	
 	public Pedido() { }
-	public Pedido(Cliente cliente) {
+	public Pedido(Cliente cliente) {	
 		this();
 		this.data = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
 		this.cliente = cliente;
@@ -25,6 +25,13 @@ public class Pedido {
 		itens.forEach(item->{
 			System.out.println(item);
 		});
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public String getSituacao() { return situacao; }
 	public void setSituacao(String situacao) { this.situacao = situacao; }
