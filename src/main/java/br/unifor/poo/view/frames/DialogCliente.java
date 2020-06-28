@@ -5,7 +5,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
+import br.unifor.poo.modelo.Cardapio;
 import br.unifor.poo.modelo.Cliente;
 import br.unifor.poo.view.components.IDialogT;
 import br.unifor.poo.view.util.Misc;
@@ -35,17 +37,35 @@ public class DialogCliente extends IDialogT<Cliente> {
 	}
 	@Override
 	public void newItem() {
-		Cliente item = new Cliente(
-				Misc.code++, 
-				crudPanel.txtFiels.get("nome").getText(), 
-				crudPanel.txtFiels.get("endereco").getText());
-		crudPanel.txtFiels.forEach((K,V)->{ V.setText(""); });
-		modelo.add(item);
-		modelo.fireTableDataChanged();
+		try {
+			Long code = Misc.code++;
+			String nome = crudPanel.txtFiels.get("nome").getText();
+			String endereco = crudPanel.txtFiels.get("endereco").getText();
+			String ativo = crudPanel.txtFiels.get("ativo").getText();
+			if(nome.isEmpty() || endereco.isEmpty()) {
+				JOptionPane.showMessageDialog(this, "Verifique os campos vazios.", "Ops!", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			Cliente item = new Cliente(code, nome, endereco);
+			
+			if(ativo.equals("nao") || ativo.equals("não")) {
+				item.setAtivo(false);
+			}
+			crudPanel.txtFiels.forEach((K,V)->{ V.setText(""); });
+			modelo.add(item);
+			modelo.fireTableDataChanged();
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "Verifique os campos", "Ops!", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	@Override
 	public void updateItem() {
 		Cliente item = modelo.getValueAtRow(tabela.getSelectedRow());
+		if(item == null) {
+			JOptionPane.showMessageDialog(this, "Selecione um item primeiro.", "Ops!", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 		item.setId(Long.parseLong(crudPanel.txtFiels.get("id").getText()));
 		item.setNome(crudPanel.txtFiels.get("nome").getText());
 		item.setEndereco(crudPanel.txtFiels.get("endereco").getText());
@@ -56,6 +76,10 @@ public class DialogCliente extends IDialogT<Cliente> {
 	@Override
 	public void deleteItem() {
 		Cliente item = modelo.getValueAtRow(tabela.getSelectedRow());
+		if(item == null) {
+			JOptionPane.showMessageDialog(this, "Selecione um item primeiro.", "Ops!", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 		modelo.delete(item);
 		crudPanel.txtFiels.forEach((K,V)->{ V.setText(""); });
 		modelo.fireTableDataChanged();
